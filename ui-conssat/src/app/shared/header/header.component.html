@@ -1,0 +1,27 @@
+<header>
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <h1 class=" text-left col-md-6"><img src="./assets/images/logoconsat.jpg" width="30%;" class="center img-fluid" alt="MTPE"></h1>
+            <h2 class="col-md-6 text-right">
+                <h1>{{title}}</h1>
+            </h2>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-toolbar id="info_user">
+        <mat-toolbar-row>
+            <h2 class="col-md-12 text-right company_sesion d-none d-sm-block">
+                <span class="pull-right">
+            <a title="Cerrar sesión" style="color: #FCFCFC" (click)="saliendo()"><i class="material-icons">power_settings_new</i></a>
+          </span>
+                <span class="pull-right">Elusuario Logueado&nbsp;&nbsp;</span>
+                <span class="pull-right">{{usuariologeado}}&nbsp;&nbsp;</span><br>
+                <span class="pull-right">{{nombreregion}}({{nombrerol}})</span>
+            </h2>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-toolbar color="accent">
+        <mat-toolbar-row>
+        </mat-toolbar-row>
+    </mat-toolbar>
+</header>

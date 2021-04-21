@@ -1,0 +1,184 @@
+<div class="row app-title-page">
+  <h1 class="col-md-12">PLAN DE TRABAJO</h1>
+  <div class="col-md-6 text-right">
+  </div>
+</div>
+
+
+<form [formGroup]="busquedaForm">
+  <div class="row">
+    <div class="col-md-12">
+
+
+      <div class="row">
+        <div class="col-md-12">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Criterios de Consulta del Plan de Trabajo
+              </mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+
+              <div class="row">
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Código de Plan de Trabajo</mat-label>
+                    <input matInput placeholder="Código de Plan de Trabajo" name="codigo" formControlName="codigo"
+                      [Uppercased]>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-md-2">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha Inicio Aprobación</mat-label>
+                    <input matInput [matDatepicker]="pickerFIAprobacion" placeholder="Fecha Inicio Aprobación"
+                      formControlName="fechaInicioAprobacion" [readonly]="true" name="fecha_inicio_aprobacion">
+                    <mat-datepicker-toggle matSuffix [for]="pickerFIAprobacion"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFIAprobacion startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-2">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha Fin Aprobación</mat-label>
+                    <input matInput [matDatepicker]="pickerFFAprobacion" placeholder="Fecha Fin Aprobación"
+                      formControlName="fechaFinAprobacion" [readonly]="true" name="fecha_fin_aprobacion">
+                    <mat-datepicker-toggle matSuffix [for]="pickerFFAprobacion"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFFAprobacion startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-md-2">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha Inicio Vigencia</mat-label>
+                    <input matInput [matDatepicker]="pickerFIVigencia" placeholder="Fecha Inicio Vigencia"
+                      formControlName="fechaInicioVigencia" [readonly]="true" name="fecha_inicio_vigencia">
+                    <mat-datepicker-toggle matSuffix [for]="pickerFIVigencia"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFIVigencia startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-2">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha Fin Vigencia</mat-label>
+                    <input matInput [matDatepicker]="pickerFFVigencia" placeholder="Fecha Fin Vigencia"
+                      formControlName="fechaFinVigencia" [readonly]="true" name="fecha_fin_vigencia">
+                    <mat-datepicker-toggle matSuffix [for]="pickerFFVigencia"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFFVigencia startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+
+              <div class="row">
+                <div class="col-sm-6 col-md-12 app-search-buttons app-form-buttons">
+                  <button mat-raised-button color="primary" (click)="buscar()">
+                    <mat-icon>search</mat-icon>
+                    Buscar
+                  </button>
+                  <button mat-raised-button color="accent" (click)="nuevoRegistro()">
+                    <mat-icon class="material-icons-outlined">insert_drive_file</mat-icon>
+                    Nuevo
+                  </button>
+                  <button mat-raised-button color="primary" (click)="limpiarRegistro()" type="button">
+                    <mat-icon class="material-icons-outlined">clear_all</mat-icon>Limpiar
+                   </button>
+                </div>
+              </div>
+
+            </mat-card-content>
+          </mat-card>
+
+
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Listado de Planes de Trabajo
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+
+              <table mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="nro">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> NRO.</th>
+                  <td mat-cell *matCellDef="let i=index"> {{i + 1}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="codigoPT">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> COD. PT</th>
+                  <td mat-cell *matCellDef="let row"> {{row.vCodigoplantrab}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="documentoAprobacion">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> DOC. APROBACIÓN</th>
+                  <td mat-cell *matCellDef="let row"> {{row.vNumdocapr}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="archivo">
+                  <th mat-header-cell *matHeaderCellDef> ARCHIVO</th>
+                  <td mat-cell *matCellDef="let row">
+                    <button mat-stroked-button matTooltip="Descargar" color="primary"
+                      (click)="decargarArchivo(row.pLantrabidpk)">
+                      <mat-icon>cloud_download</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fechaAprobacion">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA APROBACIÓN</th>
+                  <td mat-cell *matCellDef="let row"> {{row.dFecaprobacion}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fechaInicio">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA INICIO</th>
+                  <td mat-cell *matCellDef="let row"> {{row.dFecinicio}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="fechaFin">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA FIN</th>
+                  <td mat-cell *matCellDef="let row"> {{row.dFecfin}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ver">
+                  <th mat-header-cell *matHeaderCellDef class="text-center"> VISUALIZAR</th>
+                  <td mat-cell *matCellDef="let row" class="text-center">
+                    <button mat-stroked-button matTooltip="Ver Registro" color="primary"
+                      (click)="verRegistro(row.pLantrabidpk)">
+                      <mat-icon>remove_red_eye</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="editar">
+                  <th mat-header-cell *matHeaderCellDef class="text-center"> EDITAR</th>
+                  <td mat-cell *matCellDef="let row" class="text-center">
+                    <button mat-stroked-button matTooltip="Editar Registro" color="primary"
+                      (click)="editarRegistro(row.pLantrabidpk)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="eliminar">
+                  <th mat-header-cell *matHeaderCellDef class="text-center"> ELIMINAR</th>
+                  <td mat-cell *matCellDef="let row" class="text-center">
+                    <button mat-stroked-button matTooltip="Eliminar Registro" color="accent"
+                      (click)="eliminarRegistro(row.pLantrabidpk)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+
+              <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+              </mat-paginator>
+
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>

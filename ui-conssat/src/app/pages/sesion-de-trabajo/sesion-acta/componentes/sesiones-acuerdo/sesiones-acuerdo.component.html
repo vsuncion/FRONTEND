@@ -1,0 +1,106 @@
+<form [formGroup]="acuerdosForm">
+    <mat-card>
+
+        <mat-card-header>
+            <mat-card-title>Acuerdos Definidos en el Acta
+            </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div class="row">
+                <div class="col-sm-6 col-md-12">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Descripcion del Acuerdo</mat-label>
+                        <input matInput placeholder="Descripcion del Acuerdo" name="descripcion" formControlName="descripcion" required [Uppercased]>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Responsable</mat-label>
+                        <input matInput placeholder="Responsable" name="responsable" formControlName="responsable" required [Uppercased]>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Entidad</mat-label>
+                        <mat-select placeholder="Entidad" formControlName="entidad" name="entidad">
+                            <mat-option *ngFor="let entidad of entidades" [value]="entidad.eNtidadidpk">
+                                {{entidad.vDescripcion}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 col-md-3">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Fecha Limite de Atención</mat-label>
+                        <input matInput [matDatepicker]="pickerFechaLimite" placeholder="Fecha Limite de Atención" formControlName="fechaLimite" [readonly]="true" name="fechaLimite" required>
+                        <mat-datepicker-toggle matSuffix [for]="pickerFechaLimite"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerFechaLimite startView="year"></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-md-3" style="margin-top: 10px;">
+                    <button type="button" mat-raised-button color="primary" [disabled]="acuerdosForm.invalid || (flagBotonGrabar==false)" (click)="agregarAcuerdo()">
+                    <mat-icon>assignment_outline</mat-icon>
+                    Agregar Acuerdo
+                  </button>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <table mat-table [dataSource]="dataSource" matSort>
+
+                    <ng-container matColumnDef="item">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> NRO.</th>
+                        <td mat-cell *matCellDef="let i=index"> {{i + 1}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="descripcion">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> DESCRIPCION</th>
+                        <td mat-cell *matCellDef="let row"> {{row.vDesacuerdo}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="responsable">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> RESPONSABLE</th>
+                        <td mat-cell *matCellDef="let row"> {{row.vResponsable}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="entidad">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> ENTIDAD</th>
+                        <td mat-cell *matCellDef="let row"> {{row.entidad? row.entidad.vDesnombre : ''}} </td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="fechaLimite">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA LIMITE</th>
+                        <td mat-cell *matCellDef="let row"> {{row.dFecatencion}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="eliminar">
+                        <th mat-header-cell *matHeaderCellDef class="text-center"> ELIMINAR</th>
+                        <td mat-cell *matCellDef="let row,let i=index" class="text-center">
+                            <button mat-stroked-button type="button" matTooltip="Eliminar Registro" color="accent" (click)="eliminarRowAcuerdo(row.aCuerdoidpk)">
+                <mat-icon>delete</mat-icon>
+              </button>
+                        </td>
+                    </ng-container>
+
+
+                    <tr mat-header-row *matHeaderRowDef="columnas; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+                </table>
+
+            </div>
+        </mat-card-content>
+
+    </mat-card>
+</form>

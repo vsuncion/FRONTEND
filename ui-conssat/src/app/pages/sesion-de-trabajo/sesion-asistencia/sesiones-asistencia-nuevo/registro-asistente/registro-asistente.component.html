@@ -1,0 +1,99 @@
+<form [formGroup]="sesionDeTrabajoForm">
+
+  <div class="row">
+    <div class="col-md-12">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Datos del Asistente
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+
+          <div class="row">
+
+            <div class="col-sm-6 col-md-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Entidad</mat-label>
+                <mat-select placeholder="Entidad" formControlName="entidad" name="entidad">
+                  <mat-option *ngFor="let entidad of entidades" [value]="entidad.eNtidadidpk">
+                    {{entidad.vDesnombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Tipo de documento</mat-label>
+                <mat-select placeholder="Tipo de documento" formControlName="tipoDocumento" name="tipoDocumento">
+                  <mat-option *ngFor="let documentoTipo of documentosTipo" [value]="documentoTipo.tPdocumentoidpk">
+                    {{documentoTipo.vDescripcion}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Nro. de Documento</mat-label>
+                <input matInput placeholder="Nro. de Documento" name="numeroDocumento" formControlName="numeroDocumento"
+                  required type="number">
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Nombre" name="nombre" formControlName="nombre" required [Uppercased]>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Apellido Pat</mat-label>
+                <input matInput placeholder="Apellido Pat" name="apellidoPat" formControlName="ApellidoPaterno" required
+                  [Uppercased]>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Apellido Mat</mat-label>
+                <input matInput placeholder="Apellido Mat" name="apellidoMat" formControlName="apellidoMaterno" required
+                  [Uppercased]>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6 col-md-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Nro. Celular</mat-label>
+                <input matInput placeholder="Nro. Celular" name="nroCelular" formControlName="nroCelular" required
+                  type="number">
+              </mat-form-field>
+            </div>
+
+          </div>
+
+        </mat-card-content>
+
+        <mat-card-actions>
+          <div class="col-md-12 app-form-buttons">
+
+            <button mat-stroked-button color="primary" (click)="cancelar()" type="button">
+              <mat-icon>keyboard_arrow_left</mat-icon>
+              Cancelar
+            </button>
+            <button mat-raised-button color="accent" [disabled]="sesionDeTrabajoForm.invalid" (click)="guardar()"
+              type="button">
+              <mat-icon>save</mat-icon>
+              Guardar
+            </button>
+          </div>
+        </mat-card-actions>
+
+      </mat-card>
+    </div>
+  </div>
+
+</form>

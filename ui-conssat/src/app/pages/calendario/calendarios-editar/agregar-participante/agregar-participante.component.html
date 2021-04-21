@@ -1,0 +1,124 @@
+<mat-toolbar class="mat-primary mat-dialog-header">
+    <span>PARTICIPANTES</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+<div mat-dialog-content>
+    <form [formGroup]="participantesForm">
+
+        <div class="row">
+            <div class="col-md-12">
+
+
+                <div class="row">
+
+                    <div class="col-sm-6 col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nombres</mat-label>
+                            <input matInput placeholder="Nombres" name="nombres" formControlName="nombres" required
+                                [Uppercased]>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm-6 col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Apellido Paterno</mat-label>
+                            <input matInput placeholder="Apellido Paterno" name="apellido_paterno" required
+                                formControlName="apellidoPaterno" [Uppercased]>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Apellido Materno</mat-label>
+                            <input matInput placeholder="Apellido Materno" name="apellido_materno" required
+                                formControlName="apellidoMaterno" [Uppercased]>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm-6 col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Tipo de documento</mat-label>
+                            <mat-select placeholder="Tipo de documento" formControlName="tipoDocumento"
+                                name="tipoDocumento" required>
+                                <mat-option *ngFor="let documentoTipo of documentosTipo"
+                                    [value]="documentoTipo.tPdocumentoidpk">
+                                    {{documentoTipo.vDescripcion}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Número de documento</mat-label>
+                            <input matInput placeholder="Número de documento" name="numeroDocumento"
+                                formControlName="numeroDocumento" type="number" required [Uppercased]>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm-6 col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Entidad</mat-label>
+                            <mat-select placeholder="Entidad que Representa" formControlName="entidad" name="entidad">
+                                <mat-option *ngFor="let entidad of entidades" [value]="entidad.eNtidadidpk">
+                                    {{entidad.vDescripcion}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="Email" name="email" formControlName="email" required>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm-6 col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Fecha Actividad</mat-label>
+                            <input matInput [matDatepicker]="picker" placeholder="Fecha Inicio"
+                                formControlName="fechaActividad" [readonly]="true" name="fecha_inicio" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker startView="year">
+                            </mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <ng-container *ngIf="verificarrol(); else elseTemplate">
+                        <div class="col-sm-6 col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Comision</mat-label>
+                                <input matInput placeholder="Comision" name="comision" formControlName="comision">
+                            </mat-form-field>
+                        </div>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <div class="col-sm-6 col-md-3" style="display: none;">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Comision</mat-label>
+                                <input matInput placeholder="Comision" name="comision" formControlName="comision">
+                            </mat-form-field>
+                        </div>
+                    </ng-template>
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+</div>
+<div mat-dialog-actions align="center">
+    <button mat-stroked-button color="primary" (click)="cancelar()" type="button">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+        Cancelar
+    </button>
+    <button mat-raised-button color="accent" [disabled]="participantesForm.invalid" (click)="guardar()" type="button">
+        <mat-icon>save</mat-icon>
+        Grabar
+    </button>
+</div>

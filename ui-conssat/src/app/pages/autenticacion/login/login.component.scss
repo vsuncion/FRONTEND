@@ -1,0 +1,38 @@
+.login-card {
+    margin: 10% auto 0%;
+    width: 300px;
+    max-width: 300px;
+    text-align: center;
+    mat-card-header {
+        display: flex !important;
+        justify-content: center !important;
+    }
+    form {
+        div {
+            div {
+                mat-checkbox {
+                    float: left;
+                    margin-left: 10px;
+                }
+                button {
+                    width: 90%;
+                }
+                mat-form-field {
+                    margin: 0px auto !important;
+                    width: 90% !important;
+                }
+            }
+        }
+    }
+}
+
+::ng-deep .login-card-header-image {
+    background-image: url("../../../../assets/images/logo.png");
+    background-size: cover;
+    height: 60px !important;
+    width: 60px !important;
+}
+
+mat-checkbox {
+    padding-left: 10px;
+}

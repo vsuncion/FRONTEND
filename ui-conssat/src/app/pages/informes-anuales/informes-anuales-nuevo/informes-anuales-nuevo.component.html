@@ -1,0 +1,123 @@
+<div class="row  app-title-page">
+  <h1 class="col-md-12">REGISTRO DE INFORMES DE GESTIÓN</h1>
+  <div class="col-md-6 text-right">
+  </div>
+</div>
+<form [formGroup]="informeForm">
+  <div class="row">
+    <div class="col-md-12">
+
+
+      <div class="row">
+        <div class="col-md-12">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Datos del Informe
+              </mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content class="connsat-form-theme">
+
+              <div class="row">
+
+                <ng-container *ngIf="verificarrol(); else elseTemplate">
+                  <div class="col-sm-6 col-md-3">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Comisión</mat-label>
+                      <input matInput placeholder="Comisión" name="comision" formControlName="comision" required
+                        readonly [Uppercased]>
+                      <button mat-icon-button matTooltip="Buscar comision" type="button" class="btn-icon-input"
+                        color="primary" (click)="buscarComision()">
+                        <mat-icon>search</mat-icon>
+                      </button>
+                    </mat-form-field>
+                  </div>
+                </ng-container>
+                <ng-template #elseTemplate>
+                  <div class="col-sm-6 col-md-3" style="display: none;">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Comisión</mat-label>
+                      <input matInput placeholder="Comisión" name="comision" formControlName="comision" [Uppercased]>
+                      <button mat-icon-button matTooltip="Buscar comision" type="button" class="btn-icon-input"
+                        color="primary" (click)="buscarComision()">
+                        <mat-icon>search</mat-icon>
+                      </button>
+                    </mat-form-field>
+                  </div>
+                </ng-template>
+
+
+
+
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Número de Informe</mat-label>
+                    <input matInput placeholder="Número de Informe" name="numeroInforme" formControlName="numeroInforme"
+                      required [Uppercased]>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Número de Sesión</mat-label>
+                    <input matInput placeholder="Número de Sesión" name="numeroSesion" formControlName="numeroSesion"
+                      required readonly>
+                    <button mat-icon-button matTooltip="Buscar documento" type="button" class="btn-icon-input"
+                      color="primary" (click)="buscarNroSesiones()">
+                      <mat-icon>search</mat-icon>
+                    </button>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Fecha" formControlName="fecha"
+                      [readonly]="true" name="fecha" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Doc. Aprobación</mat-label>
+                    <input matInput placeholder="Doc. Aprobación" name="docAprobacion" formControlName="docAprobacion"
+                      required [Uppercased]>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sd-6 col-md-3">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Adjuntar Informe</mat-label>
+                    <ngx-mat-file-input accept="application/pdf" placeholder="Adjuntar Informe"
+                      formControlName="adjunto" [accept]="'.pdf'" required (change)="selectedFileDocAprobacion($event)">
+                    </ngx-mat-file-input>
+                    <mat-icon matSuffix>folder</mat-icon>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+            </mat-card-content>
+
+            <mat-card-actions>
+              <div class="col-md-12 app-form-buttons">
+                <button mat-stroked-button color="primary" (click)="cancelar()" type="button">
+                  <mat-icon>keyboard_arrow_left</mat-icon>
+                  Cancelar
+                </button>
+                <button mat-raised-button color="accent" [disabled]="informeForm.invalid" (click)="guardar()"
+                  type="button">
+                  <mat-icon>save</mat-icon>
+                  Grabar
+                </button>
+              </div>
+            </mat-card-actions>
+
+          </mat-card>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>

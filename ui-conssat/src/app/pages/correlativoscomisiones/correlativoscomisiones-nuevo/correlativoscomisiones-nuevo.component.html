@@ -1,0 +1,76 @@
+<div class="row  app-title-page">
+    <h1 class="col-md-12">CORRELATIVO COMISION</h1>
+    <div class="col-md-6 text-right">
+    </div>
+</div>
+
+
+<form [formGroup]="busquedaForm">
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>REGISTRO CORRELATIVO COMISION
+                    </mat-card-title>
+                </mat-card-header>
+
+                <mat-card-content>
+
+                    <div class="row">
+                        <div class="col-sm-2 col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>REGION</mat-label>
+                                <mat-select placeholder="Seleccione Region"  formControlName="region"
+                                 name="region" required>
+                                  <mat-option *ngFor="let region of regiones" [value]="region.rEgionidpk">
+                                    {{region.vDesnombre}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-2 col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>TIPO DE COMISION</mat-label>
+                                <mat-select placeholder="Tipo de Comision" formControlName="tiposComision"
+                                            name="tiposComision" required>
+                                  <mat-option *ngFor="let comisionTipo of tiposComision"
+                                              [value]="comisionTipo.tIpocomsidpk">
+                                    {{comisionTipo.vDesnombre}}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                        </div>
+ 
+
+                        <div class="col-sm-1 col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Valor Inicial</mat-label>
+                                <input matInput placeholder="Valor Inicial" name="valorinicial" formControlName="valorinicial" type="number" required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div  class="row" class="text-center">
+
+                        <button mat-stroked-button color="primary" type="button" (click)="cancelar()">
+                            <mat-icon>keyboard_arrow_left</mat-icon>
+                            Cancelar
+                          </button>&nbsp;
+                        <button mat-raised-button color="accent" [disabled]="busquedaForm.invalid"   type="button" (click)="guardar()">
+                            <mat-icon>save</mat-icon>
+                            Grabar Correlativo
+                          </button>
+                            
+                          
+                    </div>
+                </mat-card-content>
+                        
+            </mat-card>
+
+        </div>
+
+    </div>   
+ </form>  

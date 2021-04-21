@@ -1,0 +1,78 @@
+<div class="row  app-title-page">
+  <h1 class="col-md-12">REGISTRO DE ACTA, TEMAS Y FIRMANTES - SESIÓN</h1>
+  <div class="col-md-6 text-right">
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+
+
+    <app-sesiones-datos-sesion (cancelarEmit)="cancelar()" (guardarEmit)="guardar()"
+      [sesionDeTrabajo]="sesionDeTrabajo"></app-sesiones-datos-sesion>
+
+    <form [formGroup]="actaForm">
+      <div class="row">
+        <div class="col-md-12">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Datos del Acta
+              </mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+
+              <div class="row">
+                <div class="col-sm-6 col-md-2">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Nro. de Acta</mat-label>
+                    <input matInput placeholder="Nro. de Acta" name="numeroActa" formControlName="numeroActa" required>
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-sm-6 col-md-2">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha de Acta</mat-label>
+                    <input matInput [matDatepicker]="pickerFechaActa" placeholder="Fecha de Acta"
+                      formControlName="fechaActa" [readonly]="true" name="fechaActa" required>
+                    <mat-datepicker-toggle matSuffix [for]="pickerFechaActa"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFechaActa startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sd-6 col-md-3">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Adjuntar Acta</mat-label>
+                    <ngx-mat-file-input accept="application/pdf" placeholder="Adjuntar Acta"
+                      formControlName="adjuntoActa" [accept]="'.pdf'" required></ngx-mat-file-input>
+                    <mat-icon matSuffix>folder</mat-icon>
+                  </mat-form-field>
+                </div>
+
+
+              </div>
+
+            </mat-card-content>
+
+          </mat-card>
+        </div>
+      </div>
+    </form>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <app-sesiones-acuerdo></app-sesiones-acuerdo>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <app-sesiones-firmante></app-sesiones-firmante>
+      </div>
+    </div>
+  </div>
+</div>

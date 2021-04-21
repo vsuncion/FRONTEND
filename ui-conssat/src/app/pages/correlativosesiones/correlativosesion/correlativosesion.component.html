@@ -1,0 +1,156 @@
+<div class="row  app-title-page">
+    <h1 class="col-md-12">CORRELATIVOS SESIONES COMISION</h1>
+    <div class="col-md-6 text-right">
+    </div>
+</div>
+
+<form [formGroup]="busquedaForm">
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>Listado de Correlativos Sesion Comision
+                            </mat-card-title>
+                        </mat-card-header>
+
+                        <mat-card-content>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <button mat-raised-button color="accent"  (click)="nuevoRegistro()">
+                                        <mat-icon class="material-icons-outlined">insert_drive_file</mat-icon>
+                                        Nuevo Correlativo Comision Sesion
+                                      </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <br>
+                            
+                            <div class="row">
+                                <div class="col-sm-4 col-md-3">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>REGION</mat-label>
+                                        <mat-select placeholder="Seleccione Region"  formControlName="region"
+                                         name="region" required>
+                                          <mat-option *ngFor="let region of regiones" [value]="region.rEgionidpk">
+                                            {{region.vDesnombre}}
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+
+                                <div class="col-sm-4 col-md-3">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>TIPO DE SESION</mat-label>
+                                        <mat-select placeholder="Tipo de documento" formControlName="tipoSesion"
+                                                    name="tipoSesion"
+                                                    >
+                                          <mat-option *ngFor="let sesionTipo of tiposSesiones"
+                                                      [value]="sesionTipo.tIposesionidpk">
+                                            {{sesionTipo.vDesnombre}}
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+
+                                <div class="col-sm-4 col-md-3">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>COMISION</mat-label>
+                                        <input matInput placeholder="COMISION" name="codigocomision" formControlName="codigocomision"  [Uppercased]>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-sm-4 col-md-3" style="padding-top: 10px;">
+                                    <button mat-raised-button color="primary" (click)="buscarComisionSesiones()" [disabled]="busquedaForm.invalid" >
+                                        <mat-icon>search</mat-icon>
+                                        BUSCAR 
+                                      </button>
+                                      &nbsp;
+                                      <button mat-raised-button color="primary" (click)="limpiarRegistro()" type="button">
+                                        <mat-icon class="material-icons-outlined">clear_all</mat-icon>Limpiar
+                                       </button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                                         <!-- Position Column -->
+                                         <ng-container matColumnDef="nro">
+                                            <th mat-header-cell *matHeaderCellDef> No. </th>
+                                            <td mat-cell *matCellDef="let i=index"> {{i + 1}} </td>
+                                        </ng-container>
+
+                                          <!-- Name Column -->
+                                          <ng-container matColumnDef="region">
+                                            <th mat-header-cell *matHeaderCellDef> REGION </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.region.vDesnombre}} </td>
+                                        </ng-container>
+
+                                          <!-- Name Column -->
+                                          <ng-container matColumnDef="comision">
+                                            <th mat-header-cell *matHeaderCellDef> COMISION </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.comision.vCodcomision}} </td>
+                                        </ng-container>
+
+                                          <!-- Name Column -->
+                                          <ng-container matColumnDef="tipocomision">
+                                            <th mat-header-cell *matHeaderCellDef> TIPO COMISION </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.comision.tipocomision.vDesnombre}} </td>
+                                        </ng-container>
+
+                                          <!-- Name Column -->
+                                          <ng-container matColumnDef="tiposesion">
+                                            <th mat-header-cell *matHeaderCellDef> TIPO SESION </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.tipoSesion.vDesnombre}} </td>
+                                        </ng-container>
+
+                                         <!-- Name Column -->
+                                         <ng-container matColumnDef="fecharegistro">
+                                            <th mat-header-cell *matHeaderCellDef> FECHA REGISTRO </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.fechaRegistro}} </td>
+                                        </ng-container>
+
+                                          <!-- Name Column -->
+                                          <ng-container matColumnDef="valor">
+                                            <th mat-header-cell *matHeaderCellDef class="text-center"> VALOR CORRELATIVO </th>
+                                            <td mat-cell *matCellDef="let element" class="text-center"> {{element.valorInicial}} </td>
+                                        </ng-container>
+
+
+                                         <!-- Symbol Column -->
+                                         <ng-container matColumnDef="editar">
+                                            <th mat-header-cell *matHeaderCellDef> EDITAR </th>
+                                            <td mat-cell *matCellDef="let row" >
+                                                <button mat-stroked-button matTooltip="Editar Registro" color="primary"  (click)="editarRegistro(row.correlativoSesion)">
+                                                <mat-icon>edit</mat-icon>
+                                              </button>
+                                            </td>
+                                        </ng-container>
+                                        
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> 
+                                    </table>   
+
+                                </div>
+                            </div>
+
+                        </mat-card-content>
+
+                    </mat-card>
+
+                </div>
+            </div>        
+
+
+         </div>
+     </div>
+ </form>           

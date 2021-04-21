@@ -1,0 +1,32 @@
+.mat-input-element:disabled {
+    color: black !important;
+    text-transform: uppercase !important;
+    font-weight: bold;
+  }
+  
+  .mat-select {
+    ::ng-deep .mat-select-content {
+      width: 100%;
+    }
+  
+  }
+  
+  .mat-select-disabled {
+    ::ng-deep .mat-select-value {
+      color: black !important;
+      text-transform: uppercase !important;
+      font-weight: bold;
+    }
+  }
+
+  .btn-icon-input {
+    background-color: #ffffff;
+    position: absolute;
+    top: 3px;
+    right: -10px;
+    margin: -11px 0;
+    padding: 0;
+    min-width: 25px;
+    height: 50px;
+  }
+  

@@ -1,0 +1,12 @@
+<mat-toolbar>
+  Menú
+</mat-toolbar>
+<mat-nav-list>
+  <a mat-list-item routerLinkActive="active" *ngFor="let nav of listaMenu" [routerLink]="[nav.url]">
+    <mat-icon matListIcon>{{nav.icono}}</mat-icon> {{nav.titulo}}
+  </a>
+  <mat-divider></mat-divider>
+  <a mat-list-item (click)="cerrar_sesion()">
+    <mat-icon matListIcon>power_settings_new</mat-icon> Cerrar sesión
+  </a>
+</mat-nav-list>

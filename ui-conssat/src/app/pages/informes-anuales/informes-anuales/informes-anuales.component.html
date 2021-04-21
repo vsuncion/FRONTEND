@@ -1,0 +1,175 @@
+<div class="row  app-title-page">
+  <h1 class="col-md-12">INFORMES DE GESTIÓN</h1>
+  <div class="col-md-6 text-right">
+  </div>
+</div>
+
+
+<form [formGroup]="busquedaForm">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Criterios de Consulta
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="row">
+
+                <ng-container *ngIf="verificarrol(); else elseTemplate">
+                  <div class="col-sm-6 col-md-3">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Comision</mat-label>
+                      <input matInput placeholder="Comision" name="comision" formControlName="comision" [Uppercased]>
+                    </mat-form-field>
+                  </div>
+                </ng-container>
+                <ng-template #elseTemplate>
+                  <div class="col-sm-6 col-md-3" style="display: none;">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Comision</mat-label>
+                      <input matInput placeholder="Comision" name="comision" formControlName="comision" [Uppercased]>
+                    </mat-form-field>
+                  </div>
+                </ng-template>
+
+
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Nro. de Informe</mat-label>
+                    <input matInput placeholder="Nro. de Informe" name="numeroInforme" formControlName="numeroInforme"
+                      [Uppercased]>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Nro. de Sesión</mat-label>
+                    <input matInput placeholder="Nro. de Sesión" name="numeroSesion" formControlName="numeroSesion"
+                      [Uppercased]>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Nro. de Documento</mat-label>
+                    <input matInput placeholder="Nro. de Documento" name="numeroDocumento"
+                      formControlName="numeroDocumento" [Uppercased]>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Periodo - Desde</mat-label>
+                    <input matInput [matDatepicker]="pickerFInicio" placeholder="Periodo - Desde"
+                      formControlName="fechaInicio" [readonly]="true" name="fechaInicio">
+                    <mat-datepicker-toggle matSuffix [for]="pickerFInicio"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFInicio startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Periodo - Hasta</mat-label>
+                    <input matInput [matDatepicker]="pickerFFin" placeholder="Periodo - Hasta"
+                      formControlName="fechaFin" [readonly]="true" name="fechaFin">
+                    <mat-datepicker-toggle matSuffix [for]="pickerFFin"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFFin startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 col-md-12 app-search-buttons app-form-buttons">
+                  <button mat-raised-button color="primary" (click)="buscarInformesAnuales()" type="button">
+                    <mat-icon>search</mat-icon>
+                    Buscar
+                  </button>
+                  <button mat-raised-button color="primary" (click)="limpiarRegistro()" type="button">
+                    <mat-icon class="material-icons-outlined">clear_all</mat-icon>
+                    Limpiar
+                  </button>
+                  <button mat-raised-button color="accent" (click)="nuevoRegistro()" type="button">
+                    <mat-icon class="material-icons-outlined">insert_drive_file</mat-icon>
+                    Nuevo
+                  </button>
+                </div>
+              </div>
+
+            </mat-card-content>
+          </mat-card>
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Listado de Informes Anuales
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+
+              <table mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="nro">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> NRO.</th>
+                  <td mat-cell *matCellDef="let i=index"> {{i + 1}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="numeroInforme">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> NRO. INFORME</th>
+                  <td mat-cell *matCellDef="let row"> {{row.vCodinforme}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="numeroSesion">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> NRO. SESION</th>
+                  <td mat-cell *matCellDef="let row"> {{row.vSesion}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="documento">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>NRO. DOCUMENTO APROBACION</th>
+                  <td mat-cell *matCellDef="let row"> {{row.vNumdocap}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="fecha">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA</th>
+                  <td mat-cell *matCellDef="let row"> {{row.dFecdesde}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="ver">
+                  <th mat-header-cell *matHeaderCellDef class="text-center"> VISUALIZAR</th>
+                  <td mat-cell *matCellDef="let row" class="text-center">
+                    <button mat-stroked-button matTooltip="Ver Registro" color="primary"
+                      (click)="verRegistro(row.iNformeidpk)">
+                      <mat-icon>remove_red_eye</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="editar">
+                  <th mat-header-cell *matHeaderCellDef class="text-center"> EDITAR</th>
+                  <td mat-cell *matCellDef="let row" class="text-center">
+                    <button mat-stroked-button matTooltip="Editar Registro" color="primary"
+                      (click)="editarRegistro(row.iNformeidpk)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="eliminar">
+                  <th mat-header-cell *matHeaderCellDef class="text-center"> ELIMINAR</th>
+                  <td mat-cell *matCellDef="let row" class="text-center">
+                    <button mat-stroked-button matTooltip="Eliminar Registro" color="accent"
+                      (click)="eliminarRegistro(row.iNformeidpk)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+
+              <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+              </mat-paginator>
+
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>

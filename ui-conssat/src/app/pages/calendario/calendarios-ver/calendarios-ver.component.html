@@ -1,0 +1,181 @@
+<div class="row  app-title-page">
+    <h1 class="col-md-12">VISUALIZACIÓN DE ACTIVIDADES</h1>
+    <div class="col-md-6 text-right">
+    </div>
+</div>
+<form [formGroup]="actividadForm">
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>Datos de la Actividad en el Calendario
+                            </mat-card-title>
+                        </mat-card-header>
+
+                        <mat-card-content>
+
+                            <div class="row">
+
+                                <ng-container *ngIf="verificarrol(); else elseTemplate">
+                                    <div class="col-sm-6 col-md-6">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Comision</mat-label>
+                                            <input matInput placeholder="Comision" name="comision" formControlName="comision" required>
+                                        </mat-form-field>
+                                    </div>
+                                </ng-container>
+                                <ng-template #elseTemplate>
+                                    <div class="col-sm-6 col-md-6" style="display: none;">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Comision</mat-label>
+                                            <input matInput placeholder="Comision" name="comision" formControlName="comision">
+                                        </mat-form-field>
+                                    </div>
+                                </ng-template>
+
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 col-md-3">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Actividad</mat-label>
+                                        <input matInput placeholder="Actividad" name="actividad" formControlName="actividad" required>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-sm-6 col-md-3">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Fecha</mat-label>
+                                        <input matInput [matDatepicker]="picker" placeholder="Fecha" formControlName="fecha" [readonly]="true" name="fecha" required>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker startView="year"></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-sm-6 col-md-3">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Hora de Inicio</mat-label>
+                                        <input matInput [ngxTimepicker]="horaInicioPicker" placeholder="Hora de Inicio" formControlName="horaInicio" [readonly]="true" name="horaInicio">
+                                        <ngx-material-timepicker-toggle matSuffix [for]="horaInicioPicker"></ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #horaInicioPicker></ngx-material-timepicker>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-sm-6 col-md-3">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Hora de Término</mat-label>
+                                        <input matInput [ngxTimepicker]="horaTerminoPicker" placeholder="Hora de Término" formControlName="horaTermino" [readonly]="true" name="horaTermino">
+                                        <ngx-material-timepicker-toggle matSuffix [for]="horaTerminoPicker"></ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #horaTerminoPicker></ngx-material-timepicker>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-sm-6 col-md-2">
+                                    <section class="app-checkbok-form-field">
+                                        <mat-checkbox formControlName="fueEjecutado">Se Ejecutó ?</mat-checkbox>
+                                    </section>
+                                </div>
+
+                                <div class="col-sm-2 col-md-2">
+                                    fecha ejecuto
+                                </div>
+
+                                <div class="col-sm-4 col-md-8">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Comentario de la ejecución</mat-label>
+                                        <input matInput placeholder="Comentario de la ejecución" name="comentario" formControlName="comentario" required>
+                                    </mat-form-field>
+                                </div>
+
+
+
+                            </div>
+
+                        </mat-card-content>
+
+                        <mat-card-actions>
+                            <div class="col-md-12 app-form-buttons">
+                                <button mat-stroked-button color="primary" (click)="cancelar()" type="button">
+                  <mat-icon>keyboard_arrow_left</mat-icon>
+                  Cancelar
+                </button>
+                            </div>
+                        </mat-card-actions>
+
+                    </mat-card>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-card>
+                        <mat-card-header style="padding-bottom: inherit;">
+
+                        </mat-card-header>
+
+                        <mat-card-content>
+                            <table mat-table [dataSource]="dataSource" matSort>
+
+                                <ng-container matColumnDef="nro">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> NRO.</th>
+                                    <td mat-cell *matCellDef="let i=index"> {{i + 1}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="participa">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> PART</th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <mat-checkbox disabled [checked]="row.participa"></mat-checkbox>
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="nombres">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRES Y APELLIDOS</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.nombres}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="tipoDocumento">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> TIPO DOC.</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.tipoDocumento}} </td>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="numeroDocumento">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> NRO. DOC</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.numeroDocumento}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="entidad">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ENTIDAD</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.entidad}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="email">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> EMAIL</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+                                </ng-container>
+
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+
+
+                        </mat-card-content>
+
+                    </mat-card>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

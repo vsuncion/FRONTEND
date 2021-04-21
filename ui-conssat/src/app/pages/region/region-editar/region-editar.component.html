@@ -1,0 +1,167 @@
+<div class="row  app-title-page">
+  <h1 class="col-md-12">EDITAR ENCARGADO REGION</h1>
+  <div class="col-md-6 text-right">
+  </div>
+</div>
+
+<form [formGroup]="busquedaForm" novalidate>
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="row">
+        <div class="col-md-12">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Datos del encargado de la Region
+              </mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+
+              <div class="row">
+
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>REGION</mat-label>
+                    <mat-select placeholder="Seleccione Region" formControlName="region" name="region">
+                      <mat-option *ngFor="let region of regiones" [value]="region.rEgionidpk">
+                        {{region.vDesnombre}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>ENTIDAD</mat-label>
+                    <mat-select placeholder="Seleccione Entidad" formControlName="entidad" name="entidad">
+                      <mat-option *ngFor="let entidad of entidades" [value]="entidad.eNtidadidpk">
+                        {{entidad.vDescripcion}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+
+
+              <div class="row">
+
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>NOMBRE</mat-label>
+                    <input matInput placeholder="Nombre del Encargado" name="nombre" formControlName="nombre"
+                      [Uppercased]>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>APELLIDO PATERNO</mat-label>
+                    <input matInput placeholder="Apellido Paterno" name="apepaterno" formControlName="apepaterno"
+                      [Uppercased]>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>APELLIDO MATERNO</mat-label>
+                    <input matInput placeholder="Apellido Materno" name="apematerno" formControlName="apematerno"
+                      [Uppercased]>
+                  </mat-form-field>
+                </div>
+
+
+              </div>
+
+
+              <div class="row">
+
+
+
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>CELULAR</mat-label>
+                    <input matInput placeholder="celular" name="celular" formControlName="celular" type="number">
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>TIPO DOCUMENTO</mat-label>
+                    <mat-select placeholder="Seleccione Tipo Documento" formControlName="tpdocumento"
+                      name="tpdocumento">
+                      <mat-option *ngFor="let documentoTipo of documentosTipo" [value]="documentoTipo.tPdocumentoidpk">
+                        {{documentoTipo.vDescripcion}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>NUMERO DOCUMENTO</mat-label>
+                    <input matInput placeholder="Numero Documento" name="numdocumento" formControlName="numdocumento" type="number" >
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+
+              <div class="row">
+
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>DOCUMENTO APROBACION</mat-label>
+                    <input matInput placeholder="Numero Documento Aprobacion" name="numdocaprobacion"
+                      formControlName="numdocaprobacion">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-4 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha Documento</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Fecha Documento"
+                      formControlName="fechaDocumento" [readonly]="true" name="fechaDocumento" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-4 col-md-4">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Archivo</mat-label>
+                    <ngx-mat-file-input accept="application/pdf" placeholder="Adjuntar archivo"
+                      formControlName="adjunto" [accept]="'.pdf'" required (change)="selectedFileDocAprobacion($event)">
+                    </ngx-mat-file-input>
+                    <mat-icon matSuffix>folder</mat-icon>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+            </mat-card-content>
+
+            <mat-card-actions>
+              <div class="col-md-12 app-form-buttons">
+                <button mat-stroked-button color="primary" type="button" (click)="cancelar()">
+                  <mat-icon>keyboard_arrow_left</mat-icon>
+                  Cancelar
+                </button>
+                <button mat-raised-button color="accent" type="button" (click)="guardar()">
+                  <mat-icon>save</mat-icon>
+                  Grabar
+                </button>
+              </div>
+            </mat-card-actions>
+
+          </mat-card>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</form>

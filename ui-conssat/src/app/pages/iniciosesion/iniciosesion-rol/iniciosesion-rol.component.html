@@ -1,0 +1,180 @@
+
+<div class="row  app-title-page">
+  <h1 class="col-md-12">ROL DE USUARIO</h1>
+  <div class="col-md-6 text-right">
+  </div>
+</div>
+
+<form [formGroup]="busquedaForm" novalidate>
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="row">
+        <div class="col-md-12">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Datos de la Usuario
+              </mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+
+              <div class="row">
+
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>NOMBRE</mat-label>
+                    <input matInput placeholder="Nombre" name="nombre"
+                           formControlName="nombre" readonly>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>APELLIDO PATERNO</mat-label>
+                    <input matInput placeholder="Ingrese Numero Documento" name="apepaterno"
+                           formControlName="apepaterno" readonly>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>APELLIDO MATERNO</mat-label>
+                    <input matInput placeholder="Nombre" name="apematerno"
+                           formControlName="apematerno" readonly>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+
+              <div class="row">
+
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>REGION</mat-label>
+                    <input matInput placeholder="Region" name="region" formControlName="region" readonly >
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>CORREO</mat-label>
+                    <input matInput placeholder="Email" name="correo" formControlName="correo" readonly>
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>FECHA REGISTRO</mat-label>
+                    <input matInput placeholder="Email" name="fecregistro" formControlName="fecregistro" readonly >
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+
+              <div class="row">
+
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>TIPO DE ROL</mat-label>
+                    <mat-select placeholder="Seleccione Rol"  formControlName="rol"
+                     name="rol">
+                      <mat-option *ngFor="let rolTipo of rolesTipo" [value]="rolTipo.rOlidpk" required>
+                        {{rolTipo.vDescripcion}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+              </div>
+
+              <div class="col-sm-6 col-md-4">
+                <button mat-raised-button color="accent" type="button" (click)="guardar()" [disabled]="busquedaForm.invalid">
+                  <mat-icon>group_add</mat-icon>
+                  AGREGAR ROL
+                </button>
+              </div>
+
+              <div class="col-sm-6 col-md-4">
+                <button mat-stroked-button color="primary"  type="button" (click)="cancelar()">
+                  <mat-icon>keyboard_arrow_left</mat-icon>
+                  Cancelar
+                </button>
+              </div>
+
+              </div>
+
+              <!-- LISTADO CONSEJOS CABECERA-->
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>Listado de Usuarios y roles
+                  </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+
+                  <table mat-table [dataSource]="dataSource" matSort>
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="nro">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> NRO.</th>
+                      <td mat-cell *matCellDef="let i=index"> {{i + 1}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="nombrerol">
+                      <th mat-header-cell *matHeaderCellDef> NOMBRE DEL ROL </th>
+                      <td mat-cell *matCellDef="let row"> {{row.roles.vDescripcion}} </td>
+                    </ng-container>
+
+                     <!-- Name Column -->
+                     <ng-container matColumnDef="fecharegistro">
+                      <th mat-header-cell *matHeaderCellDef> FECHA REGISTRO </th>
+                      <td mat-cell *matCellDef="let row"> {{row.dFecreg}} </td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="estado">
+                      <th mat-header-cell *matHeaderCellDef> ESTADO </th>
+                      <td mat-cell *matCellDef="let row"> {{row.cFlgactivo=='1'? 'ACTIVO':'INACTIVO'}} </td>
+                    </ng-container>
+
+
+                     <!--  SOLO SE ACTIVA EL BOTON CUANDO ESTE ESTA ACTIVO-->
+                     <ng-container matColumnDef="activar">
+                      <th mat-header-cell *matHeaderCellDef class="text-center">HABILITAR ROL</th>
+                      <td mat-cell *matCellDef="let row" class="text-center">
+                        <button mat-stroked-button matTooltip="Habilitar Rol" color="primary" *ngIf="row.cFlgactivo!='1'" (click)="habilitarRol(row.uSuariorolidpk)">
+                          <mat-icon>clear</mat-icon>
+                        </button>
+                        <button mat-stroked-button matTooltip="Desabilitar Rol" color="primary" *ngIf="row.cFlgactivo=='1'" (click)="desabilitarRol(row.uSuariorolidpk)">
+                          <mat-icon>done_outline</mat-icon>
+                        </button>
+                      </td>
+                    </ng-container>
+
+
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                   </table>
+
+
+
+
+                </mat-card-content>
+              </mat-card>
+
+
+
+            </mat-card-content>
+          </mat-card>
+       </div>
+      </div>
+
+
+    </div>
+  </div>
+ </form>
+

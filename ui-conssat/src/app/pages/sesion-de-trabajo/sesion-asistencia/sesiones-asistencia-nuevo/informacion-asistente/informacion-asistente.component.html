@@ -1,0 +1,83 @@
+<form [formGroup]="informacionAsistenteForm">
+
+    <div class="row">
+        <div class="col-md-12 ">
+            <mat-card>
+                <mat-card-header class="justify-content-center">
+                    <mat-card-title>ASISTENCIA
+                    </mat-card-title>
+                </mat-card-header>
+
+                <mat-card-content>
+
+                    <div class="row" style="margin-left: 10px;margin-bottom: 10px;">
+                        <div class="col-sm-6 col-md-3">
+                            <mat-checkbox name="asistencia" formControlName="asistencia" style="font-weight: bold;font-size: 16px;">MARCAR ASISTENCIA
+                            </mat-checkbox>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-sm-6 col-md-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nombre y Apellido</mat-label>
+                                <input matInput placeholder="Nombre y Apellido" name="apellidoNombre" formControlName="apellidoNombre" required [readonly]="true">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nro. de Documento</mat-label>
+                                <input matInput placeholder="Nro. de Documento" name="numeroDocumento" formControlName="numeroDocumento" required [readonly]="true">
+                            </mat-form-field>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-sm-6 col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Hora Inicio</mat-label>
+                                <input matInput [ngxTimepicker]="horaInicioPicker" placeholder="Hora Inicio" formControlName="horaInicio" [readonly]="true" name="horaInicio">
+                                <ngx-material-timepicker-toggle matSuffix [for]="horaInicioPicker">
+                                </ngx-material-timepicker-toggle>
+                                <ngx-material-timepicker #horaInicioPicker></ngx-material-timepicker>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Hora Termino</mat-label>
+                                <input matInput [ngxTimepicker]="horaTerminoPicker" placeholder="Hora Termino" formControlName="horaTermino" [readonly]="true" name="horaTermino">
+                                <ngx-material-timepicker-toggle matSuffix [for]="horaTerminoPicker">
+                                </ngx-material-timepicker-toggle>
+                                <ngx-material-timepicker #horaTerminoPicker></ngx-material-timepicker>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <div class="col-md-12 app-form-buttons">
+
+                        <button mat-stroked-button color="primary" (click)="cancelar()" type="button">
+                            <mat-icon>keyboard_arrow_left</mat-icon>
+                            Cancelar
+                        </button>
+                        <button mat-raised-button color="accent" [disabled]="informacionAsistenteForm.invalid" (click)="actualizar()" type="button">
+                            <mat-icon>save</mat-icon>
+                            Actualizar
+                        </button>
+                    </div>
+                </mat-card-actions>
+
+            </mat-card>
+        </div>
+    </div>
+
+</form>

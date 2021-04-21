@@ -1,0 +1,72 @@
+<form [formGroup]="sesionDeTrabajoForm">
+
+  <div class="row">
+    <div class="col-md-12">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Datos de la Sesión
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-sm-6 col-md-2">
+              <mat-form-field appearance="outline">
+                <mat-label>Nro. de Sesión</mat-label>
+                <input matInput placeholder="Nro. de Sesión" name="numeroSesion" formControlName="numeroSesion"
+                  required>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6 col-md-2">
+              <mat-form-field appearance="outline">
+                <mat-label>Tipo de Sesión</mat-label>
+                <mat-select placeholder="Tipo de documento" formControlName="tipoSesion" name="tipoSesion" required>
+                  <mat-option *ngFor="let sesionTipo of sesionesTipo" [value]="sesionTipo.codigo">
+                    {{sesionTipo.descripcion}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-6 col-md-2">
+              <mat-form-field appearance="outline">
+                <mat-label>Fecha de Sesión</mat-label>
+                <input matInput [matDatepicker]="picker" placeholder="Fecha de Sesión" formControlName="fechaSesion"
+                  [readonly]="true" name="fechaSesion" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="year"></mat-datepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6 col-md-2">
+              <mat-form-field appearance="outline">
+                <mat-label>Hora de Inicio</mat-label>
+                <input matInput [ngxTimepicker]="horaInicioPicker" placeholder="Hora de Término"
+                  formControlName="horaInicio" [readonly]="true" name="horaInicio">
+                <ngx-material-timepicker-toggle matSuffix [for]="horaInicioPicker"></ngx-material-timepicker-toggle>
+                <ngx-material-timepicker #horaInicioPicker></ngx-material-timepicker>
+              </mat-form-field>
+            </div>
+
+            <div class="col-sm-6 col-md-2">
+              <mat-form-field appearance="outline">
+                <mat-label>Hora de Término</mat-label>
+                <input matInput [ngxTimepicker]="horaTerminoPicker" placeholder="Hora de Término"
+                  formControlName="horaTermino" [readonly]="true" name="horaTermino">
+                <ngx-material-timepicker-toggle matSuffix [for]="horaTerminoPicker"></ngx-material-timepicker-toggle>
+                <ngx-material-timepicker #horaTerminoPicker></ngx-material-timepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="col-md-12 app-form-buttons">
+            <button mat-stroked-button color="primary" (click)="cancelar()" type="button">
+              <mat-icon>keyboard_arrow_left</mat-icon>
+              Cancelar
+            </button>
+          </div>
+        </mat-card-actions>
+
+      </mat-card>
+    </div>
+  </div>
+</form>

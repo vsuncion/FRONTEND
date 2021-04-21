@@ -1,0 +1,146 @@
+<div class="row app-title-page">
+    <h1 class="col-md-12">DATOS DEL CONSEJERO</h1>
+    <div class="col-md-6 text-right">
+    </div>
+</div>
+<form [formGroup]="consejeroForm">
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>Datos del Consejero
+                            </mat-card-title>
+                        </mat-card-header>
+
+                        <mat-card-content>
+
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Tipo Documento</mat-label>
+                                        <input matInput placeholder="Tipo Documento" name="vtipoDocumento" formControlName="vtipoDocumento" readonly>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Número de documento</mat-label>
+                                        <input matInput placeholder="Número de documento" name="numeroDocumento" formControlName="numeroDocumento" readonly>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Nombres</mat-label>
+                                        <input matInput placeholder="Nombres" name="nombres" formControlName="nombres" readonly>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Apellido Paterno</mat-label>
+                                        <input matInput placeholder="Apellido Paterno" name="apellido_paterno" readonly formControlName="apellidoPaterno">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Apellido Materno</mat-label>
+                                        <input matInput placeholder="Apellido Materno" name="apellido_materno" readonly formControlName="apellidoMaterno">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-sm-6 col-md-4">
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Email</mat-label>
+                                        <input matInput placeholder="Email" name="email" formControlName="email" readonly>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Email2</mat-label>
+                                        <input matInput placeholder="Email 2" name="email2" formControlName="email2" readonly>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Entidad que Representa</mat-label>
+                                        <input matInput name="entidad" formControlName="entidad" readonly>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4" style="padding-top: 1em;">
+                                    <mat-radio-group aria-label="Select an option" formControlName="tipo">
+                                        <mat-radio-button value="1">TITULAR</mat-radio-button>
+                                        <mat-radio-button value="2">ALTERNO</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Fecha Inicio</mat-label>
+                                        <input matInput [matDatepicker]="picker" placeholder="Fecha Inicio" formControlName="fechaInicio" [readonly]="true" name="fecha_inicio" required>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker startView="year"></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Fecha Fin</mat-label>
+                                        <input matInput [matDatepicker]="picker2" placeholder="Fecha Fin" formControlName="fechaFin" [readonly]="true" name="fecha_fin">
+                                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker2 startView="year"></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Documento Designado</mat-label>
+                                        <input matInput placeholder="Documento Designado" name="documento_designado" formControlName="documentoDesginado" readonly>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sd-6 col-md-4">
+                                    <mat-label>DESCARGAR ARCHIVO</mat-label>
+                                    <button mat-stroked-button color="primary" type="button" (click)="decargarArchivo()">
+                    <mat-icon>cloud_download</mat-icon>
+
+                  </button>
+                                </div>
+                            </div>
+
+
+                        </mat-card-content>
+
+                        <mat-card-actions>
+                            <div class="col-md-12 app-form-buttons">
+                                <button mat-stroked-button color="primary" type="button" (click)="cancelar()">
+                  <mat-icon>keyboard_arrow_left</mat-icon>
+                  Cancelar
+                </button>
+
+                            </div>
+                        </mat-card-actions>
+
+                    </mat-card>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

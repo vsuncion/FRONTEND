@@ -1,0 +1,77 @@
+<div class="row  app-title-page">
+  <h1 class="col-md-12">VISUALIZACIÓN DE INFORMES DE GESTIÓN</h1>
+  <div class="col-md-6 text-right">
+  </div>
+</div>
+<form [formGroup]="informeForm">
+  <div class="row">
+    <div class="col-md-12">
+
+
+      <div class="row">
+        <div class="col-md-12">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Datos del Informe
+              </mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+
+              <div class="row">
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Número de Informe</mat-label>
+                    <input matInput placeholder="Número de Informe" name="numeroInforme"
+                           formControlName="numeroInforme" required>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Número de Sesión</mat-label>
+                    <input matInput placeholder="Número de Sesión" name="numeroSesion"
+                           formControlName="numeroSesion" required>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Fecha"
+                           formControlName="fecha"
+                           [readonly]="true"
+                           name="fecha"
+                           required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sd-6 col-md-3">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Adjuntar Boletín</mat-label>
+                    <input matInput placeholder="Adjuntar Boletín" name="adjunto"
+                           formControlName="adjunto">
+                    <button mat-raised-button matSuffix color="warn" (click)="descargarBoletin()">Descargar</button>
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </mat-card-content>
+
+            <mat-card-actions>
+              <div class="col-md-12 app-form-buttons">
+                <button mat-stroked-button color="primary"
+                        (click)="cancelar()" type="button">
+                  <mat-icon>keyboard_arrow_left</mat-icon>
+                  Cancelar
+                </button>
+              </div>
+            </mat-card-actions>
+
+          </mat-card>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>

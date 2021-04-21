@@ -1,0 +1,20 @@
+
+.mat-input-element:disabled {
+    color: black !important;
+    text-transform: uppercase !important;
+    font-weight: bold;
+  }
+  
+  .mat-select {
+    ::ng-deep .mat-select-content {
+      width: 100%;
+    }
+  }
+  
+  .mat-select-disabled {
+    ::ng-deep .mat-select-value {
+      color: black !important;
+      text-transform: uppercase !important;
+      font-weight: bold;
+    }
+  }

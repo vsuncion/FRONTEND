@@ -1,0 +1,179 @@
+<div class="row  app-title-page">
+  <h1 class="col-md-12">SESIONES DE TRABAJO</h1>
+  <div class="col-md-6 text-right">
+  </div>
+</div>
+
+
+<form [formGroup]="busquedaForm">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Criterios de Consulta de la Sesión
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="row">
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Nro. de Sesión</mat-label>
+                    <input matInput placeholder="Número de Designación" name="numeroSesion"
+                      formControlName="numeroSesion" [Uppercased]>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha Inicio Sesión</mat-label>
+                    <input matInput [matDatepicker]="pickerFIAprobacion" placeholder="Fecha Sesión"
+                      formControlName="fechaInicioSesion" [readonly]="true" name="fechaInicioSesion">
+                    <mat-datepicker-toggle matSuffix [for]="pickerFIAprobacion"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFIAprobacion startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fecha Fin Sesión</mat-label>
+                    <input matInput [matDatepicker]="pickerFFAprobacion" placeholder="Fecha Fin Sesión"
+                      formControlName="fechaFinSesion" [readonly]="true" name="fechaFinSesion">
+                    <mat-datepicker-toggle matSuffix [for]="pickerFFAprobacion"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFFAprobacion startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Tipo de Sesión</mat-label>
+                    <mat-select placeholder="Tipo de Sesión" formControlName="tipoSesion" name="tipoSesion">
+                      <mat-option *ngFor="let tipoSesion of tiposSesiones" [value]="tipoSesion.tIposesionidpk">
+                        {{tipoSesion.vDescripcion}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 col-md-12 app-search-buttons app-form-buttons">
+                  <button mat-raised-button color="primary" (click)="buscarSesionTrabajo()">
+                    <mat-icon>search</mat-icon>
+                    Buscar
+                  </button>
+                  <button mat-raised-button color="accent" (click)="nuevoRegistro()">
+                    <mat-icon class="material-icons-outlined">insert_drive_file</mat-icon>
+                    Nuevo
+                  </button>
+                  <button mat-raised-button color="primary" (click)="limpiarRegistro()" type="button">
+                    <mat-icon class="material-icons-outlined">clear_all</mat-icon>Limpiar
+                   </button>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Listado de Sesiones de Trabajo
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+
+              <table mat-table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="numeroComision">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> NRO. COMISION</th>
+                  <td mat-cell *matCellDef="let row">
+                    <ng-container *ngIf="(row.comisionfk)">
+                      {{row.comisionfk.vCodcomision}}
+                    </ng-container>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="numeroSesion">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> NRO. SESION</th>
+                  <td mat-cell *matCellDef="let row"> {{row.vCodsesion}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fechaSesion">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA SESIÓN</th>
+                  <td mat-cell *matCellDef="let row"> {{row.dFecreacion}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="tipoSesion">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> TIPO SESION</th>
+                  <td mat-cell *matCellDef="let row"> {{row.tipoSesiones.vDesnombre}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="asistencia">
+                  <th mat-header-cell *matHeaderCellDef class="text-center"> ASISTENCIA</th>
+                  <td mat-cell *matCellDef="let row" class="text-center">
+                    <button mat-stroked-button color="primary" matTooltip="Descargar Asistencia"
+                      (click)="asistencia(row.sEsionidpk)">
+                      <mat-icon>menu_book</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="temas">
+                  <th mat-header-cell *matHeaderCellDef class="text-center"> TEMAS</th>
+                  <td mat-cell *matCellDef="let row" class="text-center">
+                    <button mat-stroked-button color="primary" matTooltip="Descargar Tema"
+                      (click)="agregarTema(row.sEsionidpk)">
+                      <mat-icon>style</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="acta">
+                  <th mat-header-cell *matHeaderCellDef class="text-center"> ACTA</th>
+                  <td mat-cell *matCellDef="let row" class="text-center">
+                    <button mat-stroked-button color="primary" matTooltip="Descargar Acta"
+                      (click)="agregarActa(row.sEsionidpk)">
+                      <mat-icon>file_copy</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ver">
+                  <th mat-header-cell *matHeaderCellDef class="text-center"> VISUALIZAR</th>
+                  <td mat-cell *matCellDef="let row" class="text-center">
+                    <button mat-stroked-button color="primary" matTooltip="Ver Registro" color="primary"
+                      (click)="verRegistro(row.sEsionidpk)">
+                      <mat-icon>remove_red_eye</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="editar">
+                  <th mat-header-cell *matHeaderCellDef class="text-center"> EDITAR</th>
+                  <td mat-cell *matCellDef="let row" class="text-center">
+                    <button mat-stroked-button color="primary" matTooltip="Editar Registro" color="primary"
+                      (click)="editarRegistro(row.sEsionidpk)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="eliminar">
+                  <th mat-header-cell *matHeaderCellDef class="text-center"> ELIMINAR</th>
+                  <td mat-cell *matCellDef="let row" class="text-center">
+                    <button mat-stroked-button color="accent" matTooltip="Eliminar Registro"
+                      (click)="eliminarRegistro(row.sEsionidpk)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+
+              <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+              </mat-paginator>
+
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>

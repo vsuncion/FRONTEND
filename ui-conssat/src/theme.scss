@@ -1,0 +1,130 @@
+@import 'node_modules/@angular/material/theming';
+@import '~@sweetalert2/theme-material-ui/material-ui.scss';
+
+@include mat-core();
+
+/* For use in src/lib/core/theming/_palette.scss */
+$app-conssat-black: (
+  50 : #ececed,
+  100 : #d0d1d1,
+  200 : #b1b2b3,
+  300 : #929394,
+  400 : #7a7b7d,
+  500 : #636466,
+  600 : #5b5c5e,
+  700 : #515253,
+  800 : #474849,
+  900 : #353638,
+  A100 : #99c7f5,
+  A200 : #6aadf1,
+  A400 : #2994ff,
+  A700 : #0f87ff,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+
+$app-conssat-green: (
+  50: #eef7e9,
+  100: #d5ecc7,
+  200: #b9dfa2,
+  300: #9cd27c,
+  400: #87c960,
+  500: #72bf44,
+  600: #6ab93e,
+  700: #5fb135,
+  800: #55a92d,
+  900: #429b1f,
+  A100: #e0ffd5,
+  A200: #baffa2,
+  A400: #94ff6f,
+  A700: #81ff56,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+
+/* For use in src/lib/core/theming/_palette.scss */
+$app-conssat-yellow: (
+  50 : #fffae0,
+  100 : #fff2b3,
+  200 : #ffea80,
+  300 : #ffe14d,
+  400 : #ffda26,
+  500 : #ffd400,
+  600 : #ffcf00,
+  700 : #ffc900,
+  800 : #ffc300,
+  900 : #ffb900,
+  A100 : #ffffff,
+  A200 : #fffbf2,
+  A400 : #ffebbf,
+  A700 : #ffe3a6,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $light-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+
+$my-app-primary: mat-palette($app-conssat-black, 800);
+$my-app-accent: mat-palette($app-conssat-green, 800);
+$my-app-warn: mat-palette($app-conssat-yellow, 600);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+@include angular-material-theme($my-app-theme);
+
+//https://material.io/design/color/#tools-for-picking-colors
+
+
+// Define an alternate dark theme.
+$dark-primary: mat-palette($mat-green);
+$dark-accent: mat-palette($mat-yellow);
+$dark-warn: mat-palette($mat-orange);
+$dark-theme: mat-light-theme($dark-primary, $dark-accent, $dark-warn);
+
+// Include the alternative theme styles inside of a block with a CSS class. You can make this
+// CSS class whatever you want. In this example, any component inside of an element with
+// `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
+.connsat-form-theme {
+  @include angular-material-theme($dark-theme);
+}

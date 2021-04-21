@@ -1,0 +1,192 @@
+<div class="row  app-title-page">
+  <h1 class="col-md-12">INFORMACION COMISION</h1>
+  <div class="col-md-6 text-right">
+  </div>
+</div>
+
+
+<form [formGroup]="busquedaForm" novalidate>
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="row">
+        <div class="col-md-12">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>INFORMACION COMISION
+              </mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+
+              <div class="row">
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>COMISION</mat-label>
+                    <input matInput name="vcomision" formControlName="vcomision" readonly>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-8">
+                  <mat-form-field appearance="outline">
+                    <mat-label>ENCARGADO</mat-label>
+                    <input matInput name="vencargado" formControlName="vencargado" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>DOCUMENTO APROBACION</mat-label>
+                    <input matInput name="numdocumentoaprob" formControlName="numdocumentoaprob" readonly>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>FECHA DOCUMENTO</mat-label>
+                    <input matInput [matDatepicker]="picker1" formControlName="vfechadoc" [readonly]="true"
+                      name="vfechadoc" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1 startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <mat-label>DESCARGAR ARCHIVO</mat-label>
+                  <button mat-stroked-button matTooltip="Descargar" color="primary" (click)="decargarArchivo()">
+                    <mat-icon>cloud_download</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>TIPO COMISION</mat-label>
+                    <input matInput name="vtpcomision" formControlName="vtpcomision" readonly>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>FECHA INICIO</mat-label>
+                    <input matInput [matDatepicker]="picker2" placeholder="Fecha" formControlName="vfechainicio"
+                      [readonly]="true" name="vfechainicio" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2 startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>FECHA FIN</mat-label>
+                    <input matInput [matDatepicker]="picker3" placeholder="Fecha" formControlName="vfechafin"
+                      [readonly]="true" name="vfechafin" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker #picker3 startView="year"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <mat-card-actions>
+                <div class="col-md-12 app-form-buttons">
+                  <button mat-stroked-button color="primary" type="button" (click)="cancelar()">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                    Cancelar
+                  </button>
+
+                </div>
+              </mat-card-actions>
+
+              <!-- LISTADO CONSEJOS CABECERA-->
+              <mat-card>
+                <mat-card-header>
+                  <mat-card-title>Listado de Integrantes
+                  </mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+
+                  <table mat-table [dataSource]="dataSource" matSort>
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="nro">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> NRO.</th>
+                      <td mat-cell *matCellDef="let i=index"> {{i + 1}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="integrante">
+                      <th mat-header-cell *matHeaderCellDef> INTEGRANTE </th>
+                      <td mat-cell *matCellDef="let row"> {{row.consejero.vDesnombre}} {{row.consejero.vDesappaterno}}
+                        {{row.consejero.vDesapmaterno}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="tipo">
+                      <th mat-header-cell *matHeaderCellDef> TIPO </th>
+                      <td mat-cell *matCellDef="let row"> {{row.tipoconsejero.vDesnombre}} </td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="desde">
+                      <th mat-header-cell *matHeaderCellDef> DESDE </th>
+                      <td mat-cell *matCellDef="let row"> {{row.dFecinicio}} </td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="hasta">
+                      <th mat-header-cell *matHeaderCellDef> HASTA </th>
+                      <td mat-cell *matCellDef="let row"> {{row.dFecfin}} </td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="ver">
+                      <th mat-header-cell *matHeaderCellDef class="text-center"> VER</th>
+                      <td mat-cell *matCellDef="let row" class="text-center">
+                        <button mat-stroked-button matTooltip="Asignar Rol" color="primary"
+                          (click)="ver(row.cOmiconsidpk)">
+                          <mat-icon>remove_red_eye</mat-icon>
+                        </button>
+                      </td>
+                    </ng-container>
+
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="editar">
+                      <th mat-header-cell *matHeaderCellDef class="text-center"> EDITAR</th>
+                      <td mat-cell *matCellDef="let row" class="text-center">
+                        <button mat-stroked-button matTooltip="Editar Registro" color="primary"
+                          (click)="editarRegistro(row.cOmiconsidpk)">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="eliminar">
+                      <th mat-header-cell *matHeaderCellDef class="text-center"> ELIMINAR</th>
+                      <td mat-cell *matCellDef="let row" class="text-center">
+                        <button mat-stroked-button matTooltip="Eliminar Registro" color="accent"
+                          (click)="eliminarRegistro(row.cOmiconsidpk)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                  </table>
+
+
+                </mat-card-content>
+              </mat-card>
+
+
+
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</form>

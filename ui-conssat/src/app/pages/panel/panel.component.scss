@@ -1,0 +1,20 @@
+.example-sidenav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.example-container {
+  position: absolute;
+  top: 134px;
+  bottom: 68px;
+  left: 0;
+  right: 0;
+}

@@ -1,0 +1,187 @@
+<div class="row  app-title-page">
+  <h1 class="col-md-12">COMISIONES</h1>
+  <div class="col-md-6 text-right">
+  </div>
+</div>
+
+<form [formGroup]="busquedaForm" novalidate>
+  <div class="row">
+    <div class="col-md-12">
+
+      <!--CABECERA BUSQUEDA-->
+      <div class="row">
+        <div class="col-md-12">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Listado de Comisiones
+              </mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+
+              <div class="row">
+
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Comision</mat-label>
+                    <input matInput placeholder="Número de Comision" name="comision" formControlName="comision">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Encargado</mat-label>
+                    <input matInput placeholder="Nombre o Apellidos encargado" name="encargado"
+                      formControlName="encargado" [Uppercased]>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Numero Documento</mat-label>
+                    <input matInput placeholder="Numero Documento Aprobacion" name="docAprobacion"
+                      formControlName="docAprobacion" [Uppercased]>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Descripcion</mat-label>
+                    <input matInput placeholder="Descripcion" name="descripcion"
+                           formControlName="descripcion"  [Uppercased]>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6 col-md-12 app-search-buttons app-form-buttons">
+                  <button mat-raised-button color="primary" (click)="buscarComision()">
+                    <mat-icon>search</mat-icon>
+                    Buscar
+                  </button>
+                  <button mat-raised-button color="accent" (click)="nuevoRegistro()">
+                    <mat-icon class="material-icons-outlined">insert_drive_file</mat-icon>
+                    Nuevo
+                  </button>
+                  <button mat-raised-button color="primary" (click)="limpiarRegistro()" type="button">
+                    <mat-icon class="material-icons-outlined">clear_all</mat-icon>Limpiar
+                   </button>
+                </div>
+              </div>
+
+            </mat-card-content>
+
+
+          </mat-card>
+        </div>
+      </div>
+
+      <!-- FIN CABECERA-->
+
+      <!-- LISTADO CONSEJOS CABECERA-->
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Listado de Comisiones
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+
+          <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="codigo">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef> COMISION </th>
+              <td mat-cell *matCellDef="let row"> {{row.vCodcomision}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="encargado">
+              <th mat-header-cell *matHeaderCellDef> ENCARGADO </th>
+              <td mat-cell *matCellDef="let row"> {{row.consejero.vDesnombre}} {{row.consejero.vDesappaterno}}
+                {{row.consejero.vDesapmaterno}}</td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="integrantes">
+              <th mat-header-cell *matHeaderCellDef> INTEGRANTES</th>
+              <td mat-cell *matCellDef="let row">
+                <button mat-stroked-button matTooltip="Descargar" color="primary"
+                  (click)="registrarlistarintegrantes(row.cOmisionidpk)">
+                  <mat-icon>assignment_ind</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="documento">
+              <th mat-header-cell *matHeaderCellDef> DOCUMENTO </th>
+              <td mat-cell *matCellDef="let row"> {{row.vNumdocapr}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="fecha">
+              <th mat-header-cell *matHeaderCellDef> FECHA </th>
+              <td mat-cell *matCellDef="let row"> {{row.dFecdocapr}} </td>
+            </ng-container>
+
+             <!-- Symbol Column -->
+             <ng-container matColumnDef="descripcion">
+              <th mat-header-cell *matHeaderCellDef> DESCRIPCION </th>
+              <td mat-cell *matCellDef="let row"> {{row.vDescripcion}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="descargar">
+              <th mat-header-cell *matHeaderCellDef> ARCHIVO</th>
+              <td mat-cell *matCellDef="let row">
+                <button mat-stroked-button matTooltip="Descargar" color="primary"
+                  (click)="decargarArchivo(row.cOmisionidpk)">
+                  <mat-icon>cloud_download</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="editar">
+              <th mat-header-cell *matHeaderCellDef class="text-center"> EDITAR</th>
+              <td mat-cell *matCellDef="let row" class="text-center">
+                <button mat-stroked-button matTooltip="Editar Registro" color="primary"
+                  (click)="editarRegistro(row.cOmisionidpk)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="eliminar">
+              <th mat-header-cell *matHeaderCellDef class="text-center"> ELIMINAR</th>
+              <td mat-cell *matCellDef="let row" class="text-center">
+                <button mat-stroked-button matTooltip="Eliminar Registro" color="accent"
+                  (click)="eliminarRegistro(row.cOmisionidpk)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          </table>
+
+          <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+          </mat-paginator>
+
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+  </div>
+</form>

@@ -1,0 +1,21 @@
+<app-header></app-header>
+<mat-toolbar class="hidden-xs-up">
+  <button type="button" aria-label="Menú" mat-icon-button (click)="sidenav.toggle()" color="primary">
+    <mat-icon aria-label="Ver Menú">menu</mat-icon>
+  </button>
+  Menú
+</mat-toolbar>
+
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content style="overflow: scroll !important;">
+    <!--INICIO-CONTENIDO-->
+    <router-outlet></router-outlet>
+
+    <!--FIN-CONTENIDO-->
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<app-footer class="example-footer"></app-footer>
+

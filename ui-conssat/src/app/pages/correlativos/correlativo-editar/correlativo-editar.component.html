@@ -1,0 +1,80 @@
+<div class="row  app-title-page">
+    <h1 class="col-md-12">CORRELATIVO</h1>
+    <div class="col-md-6 text-right">
+    </div>
+</div>
+
+
+<form [formGroup]="busquedaForm">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>EDITAR CORRELATIVO
+                            </mat-card-title>
+                        </mat-card-header>
+
+                        <mat-card-content>
+
+                            <div class="row">
+
+                                <div class="col-sm-6 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>REGION</mat-label>
+                                        <input matInput placeholder="Region" name="region" formControlName="region" readonly>
+                                    </mat-form-field>
+                                </div>
+
+
+
+                                <div class="col-sm-6 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>CONSEJO</mat-label>
+                                        <input matInput placeholder="Consejo" name="consejo" formControlName="consejo" readonly>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>TIPO</mat-label>
+                                        <input matInput placeholder="Tipo Consejo" name="tipoconsejo" formControlName="tipoconsejo" readonly>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-sm-6 col-md-4">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Valor Inicial</mat-label>
+                                        <input matInput placeholder="Valor Inicial" name="valorinicial" formControlName="valorinicial" type="number" required>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-sm-6 col-md-4">
+                                    <br>
+                                    <button mat-raised-button color="accent" [disabled]="busquedaForm.invalid" (click)="guardar()" type="button">
+                                      <mat-icon>save</mat-icon>
+                                      Actualizar Correlativo
+                                    </button>
+                                </div>
+
+
+                            </div>
+
+
+
+
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</form>

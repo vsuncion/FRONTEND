@@ -1,0 +1,189 @@
+<div class="row  app-title-page">
+    <h1 class="col-md-12">REGISTRO DE ASISTENCIA - SESIÓN</h1>
+    <div class="col-md-6 text-right">
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <form [formGroup]="sesionDeTrabajoForm">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>Datos de la Sesión
+                            </mat-card-title>
+                        </mat-card-header>
+
+                        <mat-card-content>
+
+                            <div class="row">
+                                <div class="col-sm-6 col-md-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Nro. de Sesión</mat-label>
+                                        <input matInput placeholder="Nro. de Sesión" name="numeroSesion" formControlName="numeroSesion" required>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-sm-6 col-md-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Tipo de Sesión</mat-label>
+                                        <mat-select placeholder="Tipo de documento" formControlName="tipoSesion" name="tipoSesion" required>
+                                            <mat-option *ngFor="let sesionTipo of sesionesTipo" [value]="sesionTipo.codigo">
+                                                {{sesionTipo.descripcion}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6 col-md-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Fecha de Sesión</mat-label>
+                                        <input matInput [matDatepicker]="picker" placeholder="Fecha de Sesión" formControlName="fechaSesion" [readonly]="true" name="fechaSesion" required>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker startView="year"></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-sm-6 col-md-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Hora de Inicio</mat-label>
+                                        <input matInput [ngxTimepicker]="horaInicioPicker" placeholder="Hora de Término" formControlName="horaInicio" [readonly]="true" name="horaInicio">
+                                        <ngx-material-timepicker-toggle matSuffix [for]="horaInicioPicker"></ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #horaInicioPicker></ngx-material-timepicker>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-sm-6 col-md-2">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Hora de Término</mat-label>
+                                        <input matInput [ngxTimepicker]="horaTerminoPicker" placeholder="Hora de Término" formControlName="horaTermino" [readonly]="true" name="horaTermino">
+                                        <ngx-material-timepicker-toggle matSuffix [for]="horaTerminoPicker">
+                                        </ngx-material-timepicker-toggle>
+                                        <ngx-material-timepicker #horaTerminoPicker></ngx-material-timepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                        </mat-card-content>
+
+                        <mat-card-actions>
+                            <div class="col-md-12 app-form-buttons">
+                                <button mat-stroked-button color="primary" (click)="cancelar()" type="button">
+                  <mat-icon>keyboard_arrow_left</mat-icon>
+                  Cancelar
+                </button>
+                                <!-- <button mat-raised-button color="accent" [disabled]="sesionDeTrabajoForm.invalid"
+                        (click)="guardar()" type="button">
+                  <mat-icon>save</mat-icon>
+                  Grabar
+                </button> -->
+                            </div>
+                        </mat-card-actions>
+
+                    </mat-card>
+                </div>
+            </div>
+
+        </form>
+        <div class="row">
+            <div class="col-md-12">
+                <mat-card>
+
+                    <mat-card-header>
+                        <mat-card-title>Listado de Asistentes a la Sesión
+                        </mat-card-title>
+                    </mat-card-header>
+
+                    <mat-card-content>
+                        <div class="row">
+
+                            <div class="col-sd-6 col-md-4">
+                                <form [formGroup]="adjuntarListaForm">
+                                    <mat-form-field appearance="fill" *ngIf="!existArchivoAsistentes">
+                                        <mat-label>Adjuntar Lista de Asistencia</mat-label>
+                                        <ngx-mat-file-input accept="application/pdf" placeholder="Adjuntar Lista de Asistencia" formControlName="descargarLista" [accept]="'.pdf'" required (change)="selectedFileDoc1($event)">
+                                        </ngx-mat-file-input>
+                                        <mat-icon matSuffix>folder</mat-icon>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="fill" *ngIf="existArchivoAsistentes">
+                                        <mat-label>Lista de asistencia</mat-label>
+                                        <input matInput placeholder="" name="nombreLista" formControlName="nombreLista">
+                                        <button mat-raised-button matSuffix color="warn" (click)="descargarArchivo()">Descargar</button>
+                                    </mat-form-field>
+                                </form>
+                            </div>
+
+                            <div class="col-sd-5 col-md-8 text-right" style="margin-top: 10px;">
+                                <button type="button" mat-raised-button color="primary" mat-raised-button (click)="abrirRegistroAsistente()">
+                                <mat-icon>people</mat-icon>
+                                Agregar Asistente
+                              </button>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <table mat-table [dataSource]="dataSource" matSort>
+
+                                <ng-container matColumnDef="item">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> NRO.</th>
+                                    <td mat-cell *matCellDef="let i = index"> {{i + 1}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="participa">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ASIST</th>
+                                    <td mat-cell *matCellDef="let row">
+                                        <mat-checkbox [checked]="row.asistio ? row.asistio=='1':false" (click)="abrirIformacionAsistente(row)"></mat-checkbox>
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="tipoDocumento">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> TIPO DOC.</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.tipoDocumento}} </td>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="numero">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> NUMERO DOC.</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.numeroDocumento}} </td>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="nombres">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> APELLIDOS y NOMBRES</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.apellidosNombre}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="entidad">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ENTIDAD</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.entidad}} </td>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="entrada">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ENTRADA</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.horaEntrada}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="salida">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> SALIDA</th>
+                                    <td mat-cell *matCellDef="let row"> {{row.horaSalida}} </td>
+                                </ng-container>
+
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+
+                        </div>
+                    </mat-card-content>
+
+                </mat-card>
+            </div>
+        </div>
+
+    </div>
+</div>

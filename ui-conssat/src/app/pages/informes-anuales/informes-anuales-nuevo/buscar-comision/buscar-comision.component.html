@@ -1,0 +1,109 @@
+<mat-toolbar class="mat-primary mat-dialog-header">
+    <span>Comisiones</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+<div mat-dialog-content>
+    <form [formGroup]="informesAnualesForm">
+
+        <div class="row">
+            <div class="col-md-12">
+
+
+                <div class="row">
+
+                    <div class="col-sm-6 col-md-3">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Comision</mat-label>
+                            <input matInput placeholder="Comision" name="comision" formControlName="comision" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <button mat-raised-button color="primary" (click)="buscarComisiones()">
+                            <mat-icon>search</mat-icon>
+                            Buscar
+                        </button>
+                    </div>
+                    <div class="col-sm-12 col-md-12">
+                        <table mat-table [dataSource]="dataSource" matSort>
+
+                            <ng-container matColumnDef="item">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> NRO.</th>
+                                <td mat-cell *matCellDef="let i=index"> {{i + 1}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="sesion">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> COD. COMISION</th>
+                                <td mat-cell *matCellDef="let row"> {{row.vCodcomision}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="horaInicio">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> NRO. APROBACION </th>
+                                <td mat-cell *matCellDef="let row"> {{row.vNumdocapr}} </td>
+                            </ng-container>
+
+
+                            <ng-container matColumnDef="horaFin">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA INICIO </th>
+                                <td mat-cell *matCellDef="let row"> {{row.dFecinicio}} </td>
+                            </ng-container>
+
+
+                            <ng-container matColumnDef="fecha">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> FECHA FIN</th>
+                                <td mat-cell *matCellDef="let row"> {{row.dFecfin}} </td>
+                            </ng-container>
+
+
+                            <!-- <ng-container matColumnDef="ver">
+                                        <th mat-header-cell *matHeaderCellDef class="text-center"> VISUALIZAR</th>
+                                        <td mat-cell *matCellDef="let row" class="text-center">
+                                            <button mat-stroked-button matTooltip="Ver Registro" color="primary"
+                                                (click)="verRegistro(row.iNformeidpk)">
+                                                <mat-icon>remove_red_eye</mat-icon>
+                                            </button>
+                                        </td>
+                                    </ng-container> -->
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="seleccion(row)"></tr>
+                        </table>
+                        <div class="empty" *ngIf="dataSource === null || listaComisiones.length<=0">
+                            No existe datos para mostrar en la tabla
+                        </div>
+
+                        <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]"
+                            showFirstLastButtons>
+                        </mat-paginator>
+                    </div>
+
+                </div>
+
+
+
+                <!-- <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>Listado Comision
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+    
+    
+    
+    
+                    </mat-card-content>
+                </mat-card> -->
+
+            </div>
+        </div>
+
+    </form>
+</div>
+<div mat-dialog-actions align="center">
+    <button mat-stroked-button color="primary" (click)="cancelar()" type="button">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+        Cancelar
+    </button>
+
+</div>

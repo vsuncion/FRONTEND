@@ -1,0 +1,103 @@
+<div class="row  app-title-page">
+    <h1 class="col-md-12">CORRELATIVOS COMISIONES</h1>
+    <div class="col-md-6 text-right">
+    </div>
+</div>
+
+<form [formGroup]="busquedaForm">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <mat-card>
+
+
+                        <mat-card-header>
+                            <mat-card-title>Listado de Correlativos Comisiones
+                            </mat-card-title>
+                        </mat-card-header>
+
+                        <mat-card-content>
+                              
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <button mat-raised-button color="accent"  (click)="nuevoRegistro()">
+                                        <mat-icon class="material-icons-outlined">insert_drive_file</mat-icon>
+                                        Nuevo Correlativo Comision
+                                      </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <br>
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                                         <!-- Position Column -->
+                                         <ng-container matColumnDef="nro">
+                                            <th mat-header-cell *matHeaderCellDef> No. </th>
+                                            <td mat-cell *matCellDef="let i=index"> {{i + 1}} </td>
+                                        </ng-container>
+
+                                          <!-- Name Column -->
+                                          <ng-container matColumnDef="region">
+                                            <th mat-header-cell *matHeaderCellDef> REGION </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.region.vDesnombre}} </td>
+                                        </ng-container>
+ 
+
+                                          <!-- Name Column -->
+                                          <ng-container matColumnDef="tipocomision">
+                                            <th mat-header-cell *matHeaderCellDef> TIPO COMISION </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.tipoComisiones.vDesnombre}} </td>
+                                        </ng-container>
+ 
+
+                                         <!-- Name Column -->
+                                         <ng-container matColumnDef="fecharegistro">
+                                            <th mat-header-cell *matHeaderCellDef> FECHA REGISTRO </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.fechaRegistro}} </td>
+                                        </ng-container>
+
+                                          <!-- Name Column -->
+                                          <ng-container matColumnDef="valor">
+                                            <th mat-header-cell *matHeaderCellDef class="text-center"> VALOR CORRELATIVO </th>
+                                            <td mat-cell *matCellDef="let element" class="text-center"> {{element.valorInicial}} </td>
+                                        </ng-container>
+
+
+                                         <!-- Symbol Column -->
+                                         <ng-container matColumnDef="editar">
+                                            <th mat-header-cell *matHeaderCellDef> EDITAR </th>
+                                            <td mat-cell *matCellDef="let row" >
+                                                <button mat-stroked-button matTooltip="Editar Registro" color="primary"  (click)="editarRegistro(row.correlativoComision)">
+                                                <mat-icon>edit</mat-icon>
+                                              </button>
+                                            </td>
+                                        </ng-container>
+                                        
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> 
+                                    </table>   
+
+                                </div>
+                            </div>
+
+
+                         </mat-card-content>   
+
+
+                    </mat-card>
+
+                 </div>   
+            </div>
+
+        </div>
+    </div>
+ </form>           

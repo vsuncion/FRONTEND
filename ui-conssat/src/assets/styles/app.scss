@@ -1,0 +1,93 @@
+@import "views/table";
+
+.mat-dialog-title {
+    margin: 0px !important;
+    font-size: 15px !important;
+    font-weight: bold;
+  }
+  
+  .mat-dialog-actions {
+    &[align="end"] {
+      justify-content: flex-end;
+    }
+  
+    &[align="center"] {
+      justify-content: center;
+    }
+  
+    &[align="start"] {
+      justify-content: flex-start;
+    }
+  }
+  
+  .mat-grid-tile .mat-figure {
+    justify-content: left !important;
+    button {
+      margin-left: 10px;
+    }
+  }
+  
+  mat-dialog-content > .table-container {
+    margin-top: 15px;
+  }
+  
+  .mat-dialog-header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: -24px;
+    margin-right: -24px;
+    margin-left: -24px;
+    margin-bottom: 9px;
+    width: calc(100% + 48px) !important;
+    height: 48px !important;
+    border-radius: 4px;
+    font-weight: bolder;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 15px;
+    span {
+      margin-left: 10px;
+    }
+    button {
+      mat-icon {
+        font-size: 20px; //TAMAÑO DEL X DE CERRAR
+      }
+    }
+  }
+  
+  
+  //PARA FORMULARIOS
+  .dialog-form-actions > ::ng-deep figure {
+    //BOTONES ACCION DEL DIALOG A LA IZQUIERDA
+    justify-content: flex-start !important;
+    margin-left: 8px;
+    button {
+      margin-right: 10px;
+    }
+  }
+  
+  mat-form-field {
+    //TAMAÑO Y TIPO DE LETRA DE FORM
+    font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
+  }
+  
+  //ESTILOS BOTONES ACCION DIALOG
+  .btn-icon-input {
+    background-color: #ffffff;
+    position: absolute;
+    top: 3px;
+    right: -10px;
+    margin: -11px 0;
+    padding: 0;
+    min-width: 25px;
+  }
+  
+  .btn-input {
+    background-color: #ffffff;
+    position: absolute;
+    top: 3px;
+    right: -10px;
+    margin: -11px 0;
+    padding: 0;
+    min-width: 25px;
+    height: 40px;
+  }
