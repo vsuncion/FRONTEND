@@ -39,7 +39,7 @@ export class MenuService {
       ]
     },
     {
-      idRol: 'ROLE_CORSSAT', menus: [
+      idRol: 'ROLE_CORSAT', menus: [
         { titulo: 'consejeros', url: '/panel/consejeros', icono: 'accessibility' },
         { titulo: 'Plan de Trabajo', url: '/panel/planes-de-trabajo', icono: 'assignment_ind' },
         { titulo: 'Sesión de Trabajo', url: '/panel/sesiones-de-trabajo', icono: 'update' },
