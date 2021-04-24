@@ -85,7 +85,7 @@ export class InformesGestionService {
         info_rol: Cookie.get('idrol')
       })
     };
-    return this.http.post<ComisionResponse[]>(`${backendUrl}api/comisiones/buscarpornombre`, formData, httpOptions);
+    return this.http.post<ComisionResponse[]>(`${backendUrl}api/comisiones/buscarcomisionsesion`, formData, httpOptions);
   }
 
   public buscarInformeAnualPorId(id: number): Observable<InformeAnualResponse> {
